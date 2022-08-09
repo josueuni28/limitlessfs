@@ -57,7 +57,7 @@ Dessa maneira todas as configurações não ficam junto da sua aplicação :)
 <p>Em quanto o README está sendo finalizado, veja o exemplo de uma configuração completa, e o arquivo que é possível ler, aplicando essas configurações:</p>
 
 # Exemplo (Provisório)
-Arquivo de configuração
+*Arquivo de configuração:*
 ```js
 const limitlessfs = require('./limitlessfs')
 

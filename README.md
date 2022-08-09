@@ -54,9 +54,10 @@ console.log(limitlessfs)
 ```
 Dessa maneira todas as configurações não ficam junto da sua aplicação :)
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
-<p>Em quanto o README está sendo finalizado, vejo o exemplo de uma configuração completa e o arquivo que é possível ler aplicando essas configurações:</p>
+<p>Em quanto o README está sendo finalizado, veja o exemplo de uma configuração completa, e o arquivo que é possível ler, aplicando essas configurações:</p>
 
 # Exemplo (Provisório)
+Arquivo de configuração
 ```js
 const limitlessfs = require('./limitlessfs')
 
@@ -75,13 +76,12 @@ limitlessfs._config = {
 	_true: 'sim',
 	_false: 'nao',
 	_split: [' ate ',',',' a '],
-	_ignoreCharacter: ['?','sobre','!','love'],
+	_ignoreCharacter: ['?','sobre','!'],
 	_blocks: [
 	{
 		line: 'numeros a cercar',
 		render: 'range',
-		value: Array,
-		caseSensitive: true
+		value: Array
 	},
 	{
 		line: ['iteracao','pulo','avanco','sequencia'],
@@ -106,7 +106,8 @@ limitlessfs._config = {
         /* IMPORTANTE:
             Por padrão o limitlessfs retira todas as acentuações e converte todo o documento para letras
             minúsculas, assim quando for passar os parâmentos de um linha, informar em minúsculo e
-            sem acentuação ou cedilha */
+            sem acentuação ou cedilha.
+            É possível tirar esse comportamente de uma linha passando - caseSensitive: true (Veja mais abaixo) */
 		line: ['combinacoes a excluir','combinacoes excluidas','combinacoes para excluir'],
 		render: 'excludeCombinations',
 		require: false,
@@ -134,6 +135,9 @@ limitlessfs._config = {
 	{
 		line: ['nome do arquivo final','nome final do arquivo','arquivo de saida'],
 		render: 'filename',
+        /*
+        Se o "caseSensitive" estiver setado como true, ele não vai converter os valores da linha para minúsculo
+        */
 		caseSensitive: true,
 		require: false,
 		default: 'rand'
@@ -147,4 +151,47 @@ limitlessfs._config = {
 
 limitlessfs._read('../configuraV3.txt')
 module.exports = limitlessfs
+```
+Arquivo `configuraV3.txt`
+```txt
+## Arquivo de Configuração da Aplicação "rands.js"
+
+>> BASE...
+   Números a cercar    = 1 até 31
+   Iteração            = 1
+   Comprimento do jogo = 20
+
+>> DETALHES...
+   Números fixos         : 
+   Números excluídos     : 
+   Combinações a excluir = ''
+
+>> PERSONALIZAÇÃO...
+   Números ordenados               = sim
+   Pode repetir combinações?       = não
+   Abrir arquivo quando finalizar? = sim
+
+>> FINALIZAÇÃO...
+   Total de combinações  : 100
+   Nome do arquivo final = Loterias
+```
+Arquivo da Aplicação...
+```js
+const config = require('./configLimitlessfs')
+
+console.log(config)
+// Resultado no console:
+{
+  range: [ 1, 31 ],
+  sequential: 1,
+  fixedNum: [],
+  excludeNum: [],
+  excludeCombinations: null,
+  width: 20,
+  total: 100,
+  sorted: true,
+  norepeat: false,
+  filename: 'Loterias',
+  openfileFinished: true
+}
 ```

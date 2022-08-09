@@ -56,7 +56,7 @@ Dessa maneira todas as configurações não ficam junto da sua aplicação :)
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 
 # Exemplo (Provisório)
-<p>Em quanto o <b>README</b> está sendo finalizado, veja o exemplo de uma configuração completa, e o arquivo `.txt` que é possível ler, aplicando essas configurações:</p>
+Em quanto o **README** está sendo finalizado, veja o exemplo de uma configuração completa, e o arquivo `.txt` que é possível ler, aplicando essas configurações:<br>
 *Arquivo de configuração: `configLimitlessfs.js`*
 
 ```js

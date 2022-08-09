@@ -10,11 +10,11 @@ const limitlessfs = require('./limitlessfs')
 // Se você colocou o arquivo em uma pasta diferente, altere o caminho acima
 
 limitlessfs._config = {
-	_true: 'sim',
-	_false: 'nao',
-	_blocks: [
-        /* Confirgurar as linhas do seu arquivo */
-    ]
+  _true: 'sim',
+  _false: 'nao',
+  _blocks: [
+    /* Confirgurar as linhas do seu arquivo */
+  ]
 }
 
 limitlessfs._read('./arquivo.txt')
@@ -32,11 +32,11 @@ Exemplo:
 const limitlessfs = require('./limitlessfs')
 
 limitlessfs._config = {
-	_true: 'sim',
-	_false: 'nao',
-	_blocks: [
-        /* Confirgurar as linhas do seu arquivo */
-    ]
+  _true: 'sim',
+  _false: 'nao',
+  _blocks: [
+    /* Confirgurar as linhas do seu arquivo */
+  ]
 }
 
 limitlessfs._read('./arquivo.txt')
@@ -72,83 +72,86 @@ limitlessfs.__msg.emplyLineParamSetted: 'OBS: Linha com valor definido: "{0}". C
 limitlessfs.__defaultValues.comment = ['##','>>']
 
 limitlessfs._config = {
-	_separator: ['=',':'],
-	_true: 'sim',
-	_false: 'nao',
-	_split: [' ate ',',',' a '],
-	_ignoreCharacter: ['?','sobre','!'],
-	_blocks: [
-	{
-		line: 'numeros a cercar',
-		render: 'range',
-		value: Array
-	},
-	{
-		line: ['iteracao','pulo','avanco','sequencia'],
-		render: 'sequential',
-		value: Number,
-		require: false,
-		default: 1
-	},
-	{
-		line: 'numeros fixos',
-		render: 'fixedNum',
-		value: Array,
-		require: false,
-	},
-	{
-		line: ['numeros excluidos','numeros a excluir','numeros removidos','numeros a remover'],
-		render: 'excludeNum',
-		value: Array,
-		require: false,
-	},
-	{
-        /*  IMPORTANTE:
-            Por padrão o limitlessfs retira todas as acentuações e converte todo o documento para letras
-            minúsculas, assim quando for passar os parâmentos de um linha, informar em minúsculo e
-            sem acentuação ou cedilha.
-            É possível tirar esse comportamente de uma linha passando - caseSensitive: true
-            (Veja mais abaixo) */
-		line: ['combinacoes a excluir','combinacoes excluidas','combinacoes para excluir'],
-		render: 'excludeCombinations',
-		require: false,
-	},
-	{
-		line: ['comprimento do jogo','comprimento do cartao'],
-		render: 'width',
-	},
-	{
-		line: ['total de combinacoes','total de jogos'],
-		render: 'total',
-		require: false,
-		default: 1
-	},
-	{
-		line: ['numeros ordenados','em ordem'],
-		render: 'sorted',
-		require: false,
-	},
-	{
-		line: ['pode repetir combinacoes','pode ter combinacoes repetidas'],
-		render: 'norepeat',
-		require: false,
-	},
-	{
-		line: ['nome do arquivo final','nome final do arquivo','arquivo de saida'],
-		render: 'filename',
-        /*
-        Se o "caseSensitive" estiver setado como true, ele não vai converter os valores da
-        linha para minúsculo
-        */
-		caseSensitive: true,
-		require: false,
-		default: 'rand'
-	},
-	{
-		line: ['abrir arquivo quando finalizar','abrir ao finalizar'],
-		render: 'openfileFinished',
-		require: false,
-	}]
+  _separator: ['=',':'],
+  _true: 'sim',
+  _false: 'nao',
+  _split: [' ate ',',',' a '],
+  _ignoreCharacter: ['?','sobre','!'],
+  _blocks: [
+  {
+    line: 'numeros a cercar',
+    render: 'range',
+    value: Array
+  },
+  {
+    line: ['iteracao','pulo','avanco','sequencia'],
+    render: 'sequential',
+    value: Number,
+    require: false,
+    default: 1
+  },
+  {
+    line: 'numeros fixos',
+    render: 'fixedNum',
+    value: Array,
+    require: false,
+  },
+  {
+    line: ['numeros excluidos','numeros a excluir','numeros removidos','numeros a remover'],
+    render: 'excludeNum',
+    value: Array,
+    require: false,
+  },
+  {
+    /*  IMPORTANTE:
+    Por padrão o limitlessfs retira todas as acentuações e converte todo o documento para letras
+    minúsculas, assim quando for passar os parâmentos de um linha, informar em minúsculo e
+    sem acentuação ou cedilha.
+    É possível tirar esse comportamente de uma linha passando - caseSensitive: true
+    (Veja mais abaixo) */
+    line: ['combinacoes a excluir','combinacoes excluidas','combinacoes para excluir'],
+    render: 'excludeCombinations',
+    require: false,
+  },
+  {
+    // Não é obrigatório setar qual o tipo de valor uma linha vai ter
+    // Caso o valor não for setado o limitlessfs identifica automatícamente
+    line: ['comprimento do jogo','comprimento do cartao'],
+    render: 'width',
+    //value: Number, // Não é necessário (Mas pode ser setado por segurança e maior precisão)
+  },
+  {
+    line: ['total de combinacoes','total de jogos'],
+    render: 'total',
+    require: false,
+    default: 1
+  },
+  {
+    line: ['numeros ordenados','em ordem'],
+    render: 'sorted',
+    require: false,
+  },
+  {
+    line: ['pode repetir combinacoes','pode ter combinacoes repetidas'],
+    render: 'norepeat',
+    require: false,
+  },
+  {
+    line: ['nome do arquivo final','nome final do arquivo','arquivo de saida'],
+    render: 'filename',
+    /*
+    Se o "caseSensitive" estiver setado como true, ele não vai converter os valores da
+    linha para minúsculo
+    */
+    caseSensitive: true, // Case Sensitive para true
+    require: false,
+    default: 'rand'
+  },
+  {
+    line: ['abrir arquivo quando finalizar','abrir ao finalizar'],
+    render: 'openfileFinished',
+    require: false,
+  }]
 }
 
 limitlessfs._read('../configuraV3.txt')

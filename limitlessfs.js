@@ -1,5 +1,4 @@
 const {readFileSync, existsSync} = require('fs');
-const { Module } = require('module');
 //-----------------------------------------------------------------------------------
 String.prototype.__reSplit = function(reg){
     if(typeof reg == 'string') return this.split(reg)

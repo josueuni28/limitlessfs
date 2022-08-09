@@ -1,13 +1,24 @@
 # limitlessfs
 Custom configuration file reader for Node<br>
 Leitor de arquivo de configuração personalizado para Node.js
-<p>Alternativa para o JSON, se você precisa de um arquivo de configuração personalizado para a aplicação</p>
+<p>Alternativa para o JSON, se você precisa de um arquivo de configuração personalizado para a sua aplicação</p>
+<h2>Caracteristícas principais</h2>
+<ul>
+<li>Múltiplos separadores</li>
+<li>Comentários (tags personalizadas)</li>
+<li>Ignora linhas vazias</li>
+<li>Linhas podem ser opcionais</li>
+<li>Valores podem ser opcionais</li>
+<li>Definir valores padrão</li>
+<li>Mensagens de Erro e Alerta personalizadas</li>
+<li>Identifica valores automaticamente</li>
+<li>Simples de configurar</li>
+</ul>
 
 # como usar
 Exemplo:
 ```js
-const limitlessfs = require('./limitlessfs')
-// Se você colocou o arquivo em uma pasta diferente, altere o caminho acima
+const limitlessfs = require('./limitlessfs') // Caminho do arquivo limitlessfs (Ex.)
 
 limitlessfs._config = {
   _true: 'sim',
@@ -17,7 +28,7 @@ limitlessfs._config = {
   ]
 }
 
-limitlessfs._read('./arquivo.txt')
+limitlessfs._read('./arquivo.txt') // Caminho do seu arquivo de configuração
 
 // Após o _read() a constante será convertida em um objeto, com os valores que você definiu no "_blocks"
 console.log(limitlessfs)
@@ -52,7 +63,7 @@ const limitlessfs = require('./configureLimitlessfs')
 // A constante estará pronta para ser usada como objeto na sua Aplicação
 console.log(limitlessfs)
 ```
-Dessa maneira todas as configurações não ficam junto da sua aplicação :)
+Dessa maneira todas as configurações não ficam juntas da sua aplicação :)
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 
 # Exemplo (Provisório)
@@ -62,7 +73,7 @@ Em quanto o **README** está sendo finalizado, veja o exemplo de uma configuraç
 ```js
 const limitlessfs = require('./limitlessfs')
 
-// Personalizar as mensagens de ATENÇÃO E ERRO:
+// Personalizar as mensagens de ATENÇÃO e ERRO:
 limitlessfs.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
 limitlessfs.__msg.lineRequire = 'A linha "{0}" é necessária'
 limitlessfs.__msg.emplyLineParam = 'ATENÇÃO: Uma linha está "{0}". Vamos converter o valor para "{1}"'

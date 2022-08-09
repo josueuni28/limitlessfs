@@ -1,0 +1,26 @@
+{
+  "name": "limitlessfs",
+  "version": "1.0.0",
+  "description": "Custom configuration file reader",
+  "main": "limitlessfs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josueuni28/limitlessfs.git"
+  },
+  "keywords": [
+    "reader",
+    "custom",
+    "node",
+    "configuration",
+    "file"
+  ],
+  "author": "Josue L Souza <josueunisempre@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josueuni28/limitlessfs/issues"
+  },
+  "homepage": "https://github.com/josueuni28/limitlessfs#readme"
+}

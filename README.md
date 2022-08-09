@@ -103,11 +103,12 @@ limitlessfs._config = {
 		require: false,
 	},
 	{
-        /* IMPORTANTE:
+        /*  IMPORTANTE:
             Por padrão o limitlessfs retira todas as acentuações e converte todo o documento para letras
             minúsculas, assim quando for passar os parâmentos de um linha, informar em minúsculo e
             sem acentuação ou cedilha.
-            É possível tirar esse comportamente de uma linha passando - caseSensitive: true (Veja mais abaixo) */
+            É possível tirar esse comportamente de uma linha passando - caseSensitive: true
+            (Veja mais abaixo) */
 		line: ['combinacoes a excluir','combinacoes excluidas','combinacoes para excluir'],
 		render: 'excludeCombinations',
 		require: false,
@@ -136,7 +137,8 @@ limitlessfs._config = {
 		line: ['nome do arquivo final','nome final do arquivo','arquivo de saida'],
 		render: 'filename',
         /*
-        Se o "caseSensitive" estiver setado como true, ele não vai converter os valores da linha para minúsculo
+        Se o "caseSensitive" estiver setado como true, ele não vai converter os valores da
+        linha para minúsculo
         */
 		caseSensitive: true,
 		require: false,

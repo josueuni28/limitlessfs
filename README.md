@@ -10,7 +10,7 @@ Leitor de arquivo de configuração personalizado para Node.js
 <li>Linhas podem ser opcionais</li>
 <li>Valores podem ser opcionais</li>
 <li>Definir valores padrão</li>
-<li>Mensagens de Erro e Alerta personalizadas</li>
+<li>Mensagens de Erro e Alerta personalizados</li>
 <li>Identifica valores automaticamente</li>
 <li>Simples de configurar</li>
 </ul>
@@ -74,11 +74,11 @@ Em quanto o **README** está sendo finalizado, veja o exemplo de uma configuraç
 const limitlessfs = require('./limitlessfs')
 
 // Personalizar as mensagens de ATENÇÃO e ERRO:
-limitlessfs.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
-limitlessfs.__msg.lineRequire = 'A linha "{0}" é necessária'
-limitlessfs.__msg.emplyLineParam = 'ATENÇÃO: Uma linha está "{0}". Vamos converter o valor para "{1}"'
-limitlessfs.__msg.errorLineParam = 'ERRO no valor "{0}", passado como parâmetro'
-limitlessfs.__msg.emplyLineParamSetted: 'OBS: Linha com valor definido: "{0}". Convertido para valor default.'
+aijr.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
+aijr.__msg.lineRequire = 'Coloque a linha "{0}" ai'
+aijr.__msg.emplyLineParam = 'ATENÇÃO: A linha ({0}) está "{1}". O valor será convertido para "{2}"'
+aijr.__msg.errorLineParam = 'ERRO no valor "{0}", passado como parâmetro da linha: {1}'
+aijr.__msg.emplyLineParamSetted = 'AVISO: A linha ({0}) de valor definido está "{1}". O valor será convertido para o "valor padrão".'
 
 // Personalizando as tags de comentário:
 limitlessfs.__defaultValues.comment = ['##','>>']

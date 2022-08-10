@@ -119,7 +119,7 @@ module.exports = {
 
         return contains
     },
-    __checkValue(val){
+    __checkValue(val, line){
         if(val){
             const [str] = val
             if(`'"`.includes(str)){
@@ -140,11 +140,11 @@ module.exports = {
                 return String
             }
         }else{
-            WARN(format(this.__msg.emplyLineParam, val, this.__defaultValues.emplyLineParam))
+            WARN(format(this.__msg.emplyLineParam, line, val, this.__defaultValues.emplyLineParam))
             return this.__defaultValues.emplyLineParam
         }
     },
-    __seeValue(val) {
+    __seeValue(val, line) {
         if(val){
             const [str] = val
             if(`'"`.includes(str)){
@@ -163,7 +163,7 @@ module.exports = {
                 return val
             }
         }else{
-            ERROR(format(this.__msg.errorLineParam, val))
+            ERROR(format(this.__msg.errorLineParam, val, line))
         }
     },
     __removeQMarks() {
@@ -219,7 +219,7 @@ module.exports = {
                     const name = this._config._blocks[vli].render
                     searched = true
                     
-                    this.__lines[l][1] = [replaceChar(this.__lines[l][1]), this.__isBlockRequire(vli)]
+                    this.__lines[l][1] = [replaceChar(this.__lines[l][1]), this.__isBlockRequire(vli), this.__lines[l][0]]
 
                     if(!this.__caseSensitive(vli)){
                         this.__lines[l][1][0] = this.__lines[l][1][0].toLowerCase()
@@ -228,7 +228,7 @@ module.exports = {
                     if(this._config._blocks[vli].hasOwnProperty('value')){
                         this[name] = this._config._blocks[vli].value
                     }else{
-                        this[name] = this.__checkValue(this.__lines[l][1][0])
+                        this[name] = this.__checkValue(this.__lines[l][1][0], this.__lines[l][0])
                     }
 
                     this.__lines[l][0] = name
@@ -261,6 +261,7 @@ module.exports = {
             const value = this[keyName]
             const lineVal = this.__lines[l][1][0]
             const require = this.__lines[l][1][1]
+            const line = this.__lines[l][1][2]
 
             if(!lineVal){
                 if(require){
@@ -268,7 +269,7 @@ module.exports = {
                 }else{
                     // Verifica se a linha já foi setada para null no __checkValue()
                     if(this[keyName] != null){
-                        WARN(format(this.__msg.emplyLineParamSetted, lineVal))
+                        WARN(format(this.__msg.emplyLineParamSetted, line, lineVal))
                         this[keyName] = this.__defineDefaultValue(value)
                     }
                 }
@@ -301,7 +302,7 @@ module.exports = {
                     }
                 }
 
-                if(!setted) ERROR(format(this.__msg.errorLineParam, lineVal))
+                if(!setted) ERROR(format(this.__msg.errorLineParam, lineVal, line))
 
             }else if(value === Array){
                 let tempLineVal = lineVal
@@ -316,16 +317,16 @@ module.exports = {
                     }
                     const regex = new RegExp(igc, flagSplit) // Colocado a flag para permitir ignorar Case Sensitive no _split[]
 
-                    tempLineVal = tempLineVal.__reSplit(regex).map(el => this.__seeValue(el.trim()))
+                    tempLineVal = tempLineVal.__reSplit(regex).map(el => this.__seeValue(el.trim(), line))
                     
                 }else{
-                    tempLineVal = tempLineVal.split(this.__defaultValues._split).map(el => this.__seeValue(el.trim()))
+                    tempLineVal = tempLineVal.split(this.__defaultValues._split).map(el => this.__seeValue(el.trim(), line))
                 }
                 this[keyName] = tempLineVal
 
             }else if(value === Number){
                 const num = lineVal.replace(',','.')
-                if(!ThisIsANumber(num)) ERROR(format(this.__msg.errorLineParam, num))
+                if(!ThisIsANumber(num)) ERROR(format(this.__msg.errorLineParam, num, line))
                 this[keyName] = Number(num)
             }else if(value == null){
                 this[keyName] = null
@@ -358,9 +359,9 @@ module.exports = {
     __msg:{
         fileNotFound: 'File "{0}" not found. Check file local',
         lineRequire: 'Line {0} Required!',
-        emplyLineParam: 'WARN: Line param value: "{0}". Converted for {1}',
-        emplyLineParamSetted: 'WARN: Setted line param value: "{0}". Converted for default value.',
-        errorLineParam: 'ERROR in param value: "{0}"'
+        emplyLineParam: 'WARN: Line ({0}) param value: "{1}". Converted for {2}',
+        emplyLineParamSetted: 'WARN: Line ({0}) with defined value has a "{1}" parameter. Converted for default value.',
+        errorLineParam: 'ERROR in param value "{0}", on line: {1}'
     },
     _read(arq){
         if(!existsSync(arq)) ERROR(format(this.__msg.fileNotFound, arq))

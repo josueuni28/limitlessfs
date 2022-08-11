@@ -1,30 +1,14 @@
 const {readFileSync, existsSync} = require('fs');
 //-----------------------------------------------------------------------------------
-String.prototype.__reSplit = function(reg){
-    if(typeof reg == 'string') return this.split(reg)
+function reSplit(el, reg){
+    if(typeof reg == 'string') return el.split(reg)
 
-    return this.replace(reg,'_,,_').split('_,,_')
+    return el.replace(reg,'_,,_').split('_,,_')
 }
 
-Object.defineProperty(Array.prototype, '__aiLearn', {
-    value: function(searchElement) {
-        
-        if (this == null) throw new TypeError('"this" is null or not defined')
-        const o = Object(this)
-
-        return o.includes(searchElement)
-    }
-});
-
-Object.defineProperty(String.prototype, '__aiLearn', {
-    value: function(searchElement) {
-        
-        if (this == null) throw new TypeError('"this" is null or not defined')
-        const o = Object(this)
-    
-        return o == searchElement
-    }
-});
+function aiLearn(el, search) {
+    return (isArray(el)) ? el.includes(search) : el == search 
+}
 
 function reJoin(param) {
     if(isArray(param)) return param.join(' || ')
@@ -132,9 +116,9 @@ module.exports = {
                 return null
             }else if((this.__isConfigEmpty('_split') && this.__containsArray(val,{default:true})) || (!this.__isConfigEmpty('_split') && this.__containsArray(val))){
                 return Array
-            }else if((!this.__isConfigEmpty('_true') && this._config._true.__aiLearn(val)) || (this.__isConfigEmpty('_true') && this.__defaultValues._true.__aiLearn(val))){
+            }else if((!this.__isConfigEmpty('_true') && aiLearn(this._config._true, val)) || (this.__isConfigEmpty('_true') && aiLearn(this.__defaultValues._true, val))){
                 return Boolean
-            }else if(!this.__isConfigEmpty('_false') && this._config._false.__aiLearn(val) || (this.__isConfigEmpty('_false') && this.__defaultValues._false.__aiLearn(val))){
+            }else if((!this.__isConfigEmpty('_false') && aiLearn(this._config._false, val)) || (this.__isConfigEmpty('_false') && aiLearn(this.__defaultValues._false, val))){
                 return Boolean
             }else{
                 return String
@@ -155,9 +139,9 @@ module.exports = {
                 return undefined
             }else if(val == 'null'){
                 return null
-            }else if((!this.__isConfigEmpty('_true') && this._config._true.__aiLearn(val)) || (this.__isConfigEmpty('_true') && this.__defaultValues._true.__aiLearn(val))){
+            }else if((!this.__isConfigEmpty('_true') && aiLearn(this._config._true, val)) || (this.__isConfigEmpty('_true') && aiLearn(this.__defaultValues._true, val))){
                 return true
-            }else if(!this.__isConfigEmpty('_false') && this._config._false.__aiLearn(val) || (this.__isConfigEmpty('_false') && this.__defaultValues._false.__aiLearn(val))){
+            }else if((!this.__isConfigEmpty('_false') && aiLearn(this._config._false, val)) || (this.__isConfigEmpty('_false') && aiLearn(this.__defaultValues._false, val))){
                 return false
             }else{
                 return val
@@ -204,7 +188,7 @@ module.exports = {
             split = this._config._separator
         }
 
-        for(const l in this.__lines) this.__lines[l] = this.__lines[l].__reSplit(split).map(el => el.trim())
+        for(const l in this.__lines) this.__lines[l] = reSplit(this.__lines[l], split).map(el => el.trim())
     },
     __convertKeys(){
         for (const l in this.__lines) {
@@ -215,7 +199,7 @@ module.exports = {
         for (const vli in this._config._blocks) {
             let searched = false
             for (const l in this.__lines) {
-                if(this._config._blocks[vli].line.__aiLearn( this.__lines[l][0] )){
+                if(aiLearn( this._config._blocks[vli].line, this.__lines[l][0] )){
                     const name = this._config._blocks[vli].render
                     searched = true
                     
@@ -279,24 +263,24 @@ module.exports = {
             if(value === Boolean){
                 let setted = false
                 if(!this.__isConfigEmpty('_true') && !this.__isDefaultValueConfig('_true')){
-                    if(this._config._true.__aiLearn(lineVal)){
+                    if(aiLearn(this._config._true, lineVal)){
                         this[keyName] = true
                         setted = true
                     }
                 }else{
-                    if(this.__defaultValues._true.__aiLearn(lineVal)){
+                    if(aiLearn(this.__defaultValues._true, lineVal)){
                         this[keyName] = true
                         setted = true
                     }
                 }
 
                 if(!this.__isConfigEmpty('_false') && !this.__isDefaultValueConfig('_false')){
-                    if(this._config._false.__aiLearn(lineVal)){
+                    if(aiLearn(this._config._false, lineVal)){
                         this[keyName] = false
                         setted = true
                     }
                 }else{
-                    if(this.__defaultValues._false.__aiLearn(lineVal)){
+                    if(aiLearn(this.__defaultValues._false, lineVal)){
                         this[keyName] = false
                         setted = true
                     }
@@ -317,7 +301,7 @@ module.exports = {
                     }
                     const regex = new RegExp(igc, flagSplit) // Colocado a flag para permitir ignorar Case Sensitive no _split[]
 
-                    tempLineVal = tempLineVal.__reSplit(regex).map(el => this.__seeValue(el.trim(), line))
+                    tempLineVal = reSplit(tempLineVal, regex).map(el => this.__seeValue(el.trim(), line))
                     
                 }else{
                     tempLineVal = tempLineVal.split(this.__defaultValues._split).map(el => this.__seeValue(el.trim(), line))

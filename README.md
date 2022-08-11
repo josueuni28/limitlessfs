@@ -67,13 +67,14 @@ Dessa maneira todas as configurações não ficam juntas da sua aplicação :)
 # Opções do .config = {}
 O objeto `.config` tem várias opções para deixar a leitura do arquivo do seu jeito, são elas:<br>
 
-`_separator`: *String || Array* Caractere que separa os atributos dos valores do arquivo. *Default:* `:`<br>
-`_true`: *String || Array* Valor considerado como o **true**. *Default:* `yes`<br>
-`_false`: *String || Array* Valor considerado como o **false**. *Default:* `no`<br>
-`_split`: *String || Array* Caractere que separa os valores de um Array. *Default:* `,`<br>
-`_ignoreCharacter`: *String || Array* Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
-`_removeQM`: *Boolean* Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
-`_ignoreCaseInSplit`: *Boolean* Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
+`_separator`: *String ~ Array* | Caractere que separa os atributos dos valores do arquivo. *Default:* `:`<br>
+`_true`: *String ~ Array* | Valor considerado como o **true**. *Default:* `yes`<br>
+`_false`: *String ~ Array* | Valor considerado como o **false**. *Default:* `no`<br>
+`_split`: *String ~ Array* | Caractere que separa os valores de um Array. *Default:* `,`<br>
+`_ignoreCharacter`: *String ~ Array* | Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
+`_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
+`_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
+`_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.<br>
 ...<br>
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 

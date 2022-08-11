@@ -65,7 +65,7 @@ console.log(limitlessfs)
 ```
 Dessa maneira todas as configurações não ficam juntas da sua aplicação :)
 # Opções do .config = {}
-O objeto `.config` tem várias opções para deixar a leitura do arquivo do seu jeito, são elas:<br>
+O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é através dele que você tem acesso ao atributo *_blocks* que define a leitura das linhas do seu arquivo, o `.config` também tem várias opções para personalizar a leitura do arquivo, são elas:<br>
 
 `_separator`: *String ~ Array* | Caractere que separa os atributos dos valores do arquivo. *Default:* `:`<br>
 `_true`: *String ~ Array* | Valor considerado como o **true**. *Default:* `yes`<br>
@@ -74,8 +74,10 @@ O objeto `.config` tem várias opções para deixar a leitura do arquivo do seu 
 `_ignoreCharacter`: *String ~ Array* | Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
 `_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
 `_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
-`_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.<br>
-...<br>
+`_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.
+<p><em>OBS: Salvo o "_blocks", nenhuma outra opção é obrigatória.</em></p>
+
+# _blocks: []
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 
 # Exemplo (Provisório)

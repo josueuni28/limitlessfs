@@ -34,7 +34,7 @@ limitlessfs._read('./arquivo.txt') // Caminho do seu arquivo de configuração
 console.log(limitlessfs)
 
 ```
-**DICA:** O objeto "**._config**" por vezes, pode ficar extenso dependendo da quantidade de linhas que o seu arquivo de configuração tem. Por esse motivo, é aconselhado, definir toda a configuração do **limitlessfs** em um arquivo separado da sua aplicação para não misturar com o seu código, e depois importá-lo em seu projeto.
+> **DICA:** O objeto "**._config**" por vezes, pode ficar extenso dependendo da quantidade de linhas que o seu arquivo de configuração tem. Por esse motivo, é aconselhado, definir toda a configuração do **limitlessfs** em um arquivo separado da sua aplicação para não misturar com o seu código, e depois importá-lo em seu projeto.
 
 Exemplo:
 ```js
@@ -73,18 +73,18 @@ limitlessfs.config = {
 ```
 O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é através dele que você tem acesso ao atributo *_blocks* que define a leitura das linhas do seu arquivo, o `.config` também tem várias opções para personalizar a leitura do arquivo, são elas:<br>
 
-`_separator`: *String ~ Array* | Caractere que separa os atributos dos valores do arquivo. *Default:* `:`<br>
-`_true`: *String ~ Array* | Valor considerado como o **true**. *Default:* `yes`<br>
-`_false`: *String ~ Array* | Valor considerado como o **false**. *Default:* `no`<br>
-`_split`: *String ~ Array* | Caractere que separa os valores de um Array. *Default:* `,`<br>
-`_ignoreCharacter`: *String ~ Array* | Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
-`_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
-`_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
-`_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.
-<p><em><b>OBS:</b> Salvo o "_blocks", <strong>nenhuma opção</strong> dentro do ".config" é obrigatória.</em></p>
+* `_separator`: *String ~ Array* | Caractere que separa os atributos dos valores do arquivo. *Default:* `:`<br>
+* `_true`: *String ~ Array* | Valor considerado como o **true**. *Default:* `yes`<br>
+* `_false`: *String ~ Array* | Valor considerado como o **false**. *Default:* `no`<br>
+* `_split`: *String ~ Array* | Caractere que separa os valores de um Array. *Default:* `,`<br>
+* `_ignoreCharacter`: *String ~ Array* | Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
+* `_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
+* `_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
+* `_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.
+> <p><em><b>OBS:</b> Salvo o "_blocks", <strong>nenhuma</strong> opção dentro do ".config" é obrigatória.</em></p>
 
 # _blocks: []
-O `_blocks` é o responsável para saber como ler o seu arquivo. Ele é um `Array` onde cada *index* é responsável por uma linha do arquivo, e os *index* são preenchidos com um `Objeto` que leva as configurações.
+O `_blocks` é o responsável por saber como ler o seu arquivo. Ele é um `Array` onde cada *index* é responsável por uma linha do arquivo, e os *index* são preenchidos com um `Objeto` que leva as configurações.
 ```js
 _blocks: [
   {
@@ -98,15 +98,15 @@ _blocks: [
   ...]
 ```
 
-Porém apenas os atributos `line` e `render` são obrigatórios, o restante das opções são opcionais.
+> Apenas os atributos `line` e `render` são obrigatórios, o restante das opções são opcionais.
 <p><strong>Definição dos atributos:</strong><p>
 
-`line`: *String ~ Array* | A escrita linha no seu arquivo que leva o(s) valor(es). (Antes do `_separator`)<br>
-`render`: *String* | O nome da linha que será *"renderizado"* no Objeto final.<br>
-`value`: *Property* | Os valores são: `String`, `Number`, `Array`, `Boolean`, `null`. É o tipo do valor a ser atribuido a linha. Caso esse atributo não seja definido, o próprio *limitlessfs* buscará tipo do valor<br>
-`require`: *Boolean* | Se a linha é obrigatória ou não. *Default:* `true`<br>
-`default`: *Any* | O valor padrão a ser atribuido, caso a linha não tenha sido escrita no arquivo.<br>
-`caseSensitive`: *Boolean* | Se o *limitlessfs* respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo *(padrão)*. *Default:* `false`<br>
+* `line`: *String ~ Array* | A escrita linha no seu arquivo que leva o(s) valor(es). (Antes do `_separator`)<br>
+* `render`: *String* | O nome da linha que será *"renderizado"* no Objeto final.<br>
+* `value`: *Property* | Os valores são: `String`, `Number`, `Array`, `Boolean`, `null`. É o tipo do valor a ser atribuido a linha. Caso esse atributo não seja definido, o próprio *limitlessfs* buscará tipo do valor.<br>
+* `require`: *Boolean* | Se a linha é obrigatória ou não. *Default:* `true`<br>
+* `default`: *Any* | O valor padrão a ser atribuido, caso a linha não tenha sido escrita no arquivo.<br>
+* `caseSensitive`: *Boolean* | Se o *limitlessfs* respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo *(padrão)*. *Default:* `false`<br>
 
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 

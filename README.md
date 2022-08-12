@@ -34,7 +34,7 @@ limitlessfs._read('./arquivo.txt') // Caminho do seu arquivo de configuração
 console.log(limitlessfs)
 
 ```
-O objeto "*._config = { }*" por vezes, pode ficar extenso dependendo da quantidade de linhas que o seu arquivo de configuração tem. Por esse motivo, é aconselhado, definir toda a configuração do **limitlessfs** em um arquivo separado da sua aplicação para não misturar com o seu código, e depois importá-lo em seu projeto.
+**DICA:** O objeto "**._config**" por vezes, pode ficar extenso dependendo da quantidade de linhas que o seu arquivo de configuração tem. Por esse motivo, é aconselhado, definir toda a configuração do **limitlessfs** em um arquivo separado da sua aplicação para não misturar com o seu código, e depois importá-lo em seu projeto.
 
 Exemplo:
 ```js
@@ -65,6 +65,12 @@ console.log(limitlessfs)
 ```
 Dessa maneira todas as configurações não ficam juntas da sua aplicação :)
 # Opções do .config = {}
+```js
+limitlessfs.config = {
+  /* Sua opções do config aqui... */
+  _blocks: []
+}
+```
 O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é através dele que você tem acesso ao atributo *_blocks* que define a leitura das linhas do seu arquivo, o `.config` também tem várias opções para personalizar a leitura do arquivo, são elas:<br>
 
 `_separator`: *String ~ Array* | Caractere que separa os atributos dos valores do arquivo. *Default:* `:`<br>
@@ -75,13 +81,37 @@ O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é
 `_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
 `_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
 `_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.
-<p><em>OBS: Salvo o "_blocks", nenhuma outra opção é obrigatória.</em></p>
+<p><em><b>OBS:</b> Salvo o "_blocks", <strong>nenhuma opção</strong> dentro do ".config" é obrigatória.</em></p>
 
 # _blocks: []
+O `_blocks` é o responsável para saber como ler o seu arquivo. Ele é um `Array` onde cada *index* é responsável por uma linha do arquivo, e os *index* são preenchidos com um `Objeto` que leva as configurações.
+```js
+_blocks: [
+  {
+    line:
+    render:
+    value:
+    require:
+    default:
+    caseSensitive:  
+  },
+  ...]
+```
+
+Porém apenas os atributos `line` e `render` são obrigatórios, o restante das opções são opcionais.
+<p><strong>Definição dos atributos:</strong><p>
+
+`line`: *String ~ Array* | A escrita linha no seu arquivo que leva o(s) valor(es). (Antes do `_separator`)<br>
+`render`: *String* | O nome da linha que será *"renderizado"* no Objeto final.<br>
+`value`: *Property* | Os valores são: `String`, `Number`, `Array`, `Boolean`, `null`. É o tipo do valor a ser atribuido a linha. Caso esse atributo não seja definido, o próprio *limitlessfs* buscará tipo do valor<br>
+`require`: *Boolean* | Se a linha é obrigatória ou não. *Default:* `true`<br>
+`default`: *Any* | O valor padrão a ser atribuido, caso a linha não tenha sido escrita no arquivo.<br>
+`caseSensitive`: *Boolean* | Se o *limitlessfs* respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo *(padrão)*. *Default:* `false`<br>
+
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 
 # Exemplo (Provisório)
-Em quanto o **README** está sendo finalizado, veja o exemplo de uma configuração completa, e o arquivo `.txt` que é possível ler, aplicando essas configurações:<br>
+Em quanto o **README** está sendo finalizado, veja o exemplo de uma configuração completa de uma aplicação para gerar sequências aleatórias, e o arquivo `.txt` que é possível ler, aplicando essas configurações:<br>
 *Arquivo de configuração: `configLimitlessfs.js`*
 
 ```js
@@ -115,7 +145,7 @@ limitlessfs._config = {
     value: Number,
     /*É possível informar linhas que serão opcionais, caso o linha não esteja no arquivo
       o limitlessfs atribuirá o valor "default" */
-    require: false,
+    require: false, // Definindo que a linha não será obrigatória 
     default: 1 // Se essa linha não tiver inclusa o valor default será atribuido a 'sequential'
   },
   {

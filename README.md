@@ -1,30 +1,31 @@
 # limitlessfs
-Custom configuration file reader for Node<br>
 Leitor de arquivo de configuração personalizado para Node.js
-<p>Alternativa para o JSON, se você precisa de um arquivo de configuração personalizado para a sua aplicação</p>
+<p>Alternativa para o JSON, se você tem ou precisa de um arquivo de configuração personalizado para a sua aplicação.</p>
 <h2>Caracteristícas principais</h2>
 <ul>
 <li>Múltiplos separadores</li>
-<li>Comentários (tags personalizadas)</li>
-<li>Ignora linhas vazias</li>
-<li>Linhas podem ser opcionais</li>
-<li>Valores podem ser opcionais</li>
+<li>Comentários (Com tags personalizadas)</li>
+<li>Ignora linhas vazias no arquivo</li>
+<li>Linhas e valores podem ser opcionais</li>
 <li>Definir valores padrão</li>
 <li>Mensagens de Erro e Alerta personalizados</li>
-<li>Identifica valores automaticamente</li>
+<li>Identifica o tipo dos valores automaticamente</li>
 <li>Simples de configurar</li>
 </ul>
 
 # como usar
-Exemplo:
+> *&nbsp;**README** em construção... Caso veja algum erro, por favor relate*
+<p>O <b>limitlessfs</b> foi pensado para ter um uso mais simples possível, sendo assim, com o mínimo de código você já consegue fazer a leitura do seu arquivo.</p>
+
+Exemplo do uso:
 ```js
-const limitlessfs = require('./limitlessfs') // Caminho do arquivo limitlessfs (Ex.)
+const limitlessfs = require('./limitlessfs') // Caminho do arquivo limitlessfs
 
 limitlessfs._config = {
   _true: 'sim',
   _false: 'nao',
   _blocks: [
-    /* Confirgurar as linhas do seu arquivo */
+    /* Configuração das linhas do seu arquivo */
   ]
 }
 
@@ -46,7 +47,7 @@ limitlessfs._config = {
   _true: 'sim',
   _false: 'nao',
   _blocks: [
-    /* Confirgurar as linhas do seu arquivo */
+    /* Configuração das linhas... */
   ]
 }
 
@@ -63,7 +64,8 @@ const limitlessfs = require('./configureLimitlessfs')
 // A constante está pronta para ser usada como objeto na sua Aplicação
 console.log(limitlessfs)
 ```
-Dessa maneira todas as configurações não ficam juntas da sua aplicação :)
+Dessa maneira todas as configurações não ficam juntas da sua aplicação :relaxed:
+
 # Opções do .config = {}
 ```js
 limitlessfs.config = {
@@ -107,6 +109,13 @@ _blocks: [
 * `require`: *Boolean* | Se a linha é obrigatória ou não. *Default:* `true`<br>
 * `default`: *Any* | O valor padrão a ser atribuido, caso a linha não tenha sido escrita no arquivo.<br>
 * `caseSensitive`: *Boolean* | Se o *limitlessfs* respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo *(padrão)*. *Default:* `false`<br>
+
+> ## Nota Importante sobre o `line`
+> Para facilitar a leitura dos atributos das linhas no arquivo, por padrão o **limitlessfs** retira todas as acentuações e cedilha dos atributos e converte tudo para letras minúsculas.
+> Sendo assim, passar os parâmentos de uma linha em minúsculo, sem acentuação ou cedilha.
+
+> ## Nota sobre o `require` e `default`
+> Pode ocorrer uma situação em que se define uma linha como "require: false" e não passa o valor de "default" para a linha, nesse caso, se a linha não for escrita ou esteja sem valor, o *limitless* atribuirá o valor de `null`
 
 # Mensagens e outras opções
 
@@ -169,116 +178,10 @@ limitlessfs.__defaultValues = {
 limitlessfs.__msg.hideWarnMsg = true
 ```
 
-<p><b>README</b> Em Construção... Novas informações em breve.</p>
+# Exemplo completo
+Veja o exemplo de uma configuração completa de uma aplicação para gerar sequências aleatórias, e o arquivo `.txt` que é possível ler, aplicando essas configurações:<br>
 
-# Exemplo (Provisório)
-Em quanto o **README** está sendo finalizado, veja o exemplo de uma configuração completa de uma aplicação para gerar sequências aleatórias, e o arquivo `.txt` que é possível ler, aplicando essas configurações:<br>
-*Arquivo de configuração: `configLimitlessfs.js`*
-
-```js
-const limitlessfs = require('./limitlessfs')
-
-// Personalizar as mensagens de ATENÇÃO e ERRO:
-aijr.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
-aijr.__msg.lineRequire = 'Coloque a linha "{0}" ai'
-aijr.__msg.emplyLineParam = 'ATENÇÃO: A linha ({0}) está "{1}". O valor será convertido para "{2}"'
-aijr.__msg.errorLineParam = 'ERRO no valor "{0}", passado como parâmetro da linha: {1}'
-aijr.__msg.emplyLineParamSetted = 'AVISO: A linha ({0}) de valor definido está "{1}". O valor será convertido para o "valor padrão".'
-
-// Personalizando as tags de comentário:
-limitlessfs.__defaultValues.comment = ['##','>>']
-
-limitlessfs._config = {
-  _separator: ['=',':'], // Separa o atributo do valor (Opcional - Default: ":")
-  _true: 'sim', // Valor do true (Opcional - Default: "yes")
-  _false: 'nao', // Valor do false (Opcional - Default: "no")
-  _split: [' ate ',',',' a '], // Separadores de array (Opcional - Default: ",")
-  _ignoreCharacter: ['?','sobre','!'], // Strings que serão ignoradas/removida da leitura no arquivo
-  _blocks: [
-  {
-    line: 'numeros a cercar', // Identificador da linha
-    render: 'range', // Nome do atributo a ser definido no Objeto final
-    value: Array // Tipo do valor do atributo (Opcional)
-  },
-  {
-    line: ['iteracao','pulo','avanco','sequencia'],
-    render: 'sequential',
-    value: Number,
-    /*É possível informar linhas que serão opcionais, caso o linha não esteja no arquivo
-      o limitlessfs atribuirá o valor "default" */
-    require: false, // Definindo que a linha não será obrigatória 
-    default: 1 // Se essa linha não tiver inclusa o valor default será atribuido a 'sequential'
-  },
-  {
-    line: 'numeros fixos',
-    render: 'fixedNum',
-    value: Array,
-    require: false,
-  },
-  {
-    line: ['numeros excluidos','numeros a excluir','numeros removidos','numeros a remover'],
-    render: 'excludeNum',
-    value: Array,
-    require: false,
-  },
-  {
-    /*  IMPORTANTE:
-    Por padrão o limitlessfs retira todas as acentuações e converte todo o documento para letras
-    minúsculas, assim quando for passar os parâmentos de um linha, informar em minúsculo e
-    sem acentuação ou cedilha.
-    É possível tirar esse comportamente de uma linha passando - caseSensitive: true
-    (Veja mais abaixo) */
-    line: ['combinacoes a excluir','combinacoes excluidas','combinacoes para excluir'],
-    render: 'excludeCombinations',
-    require: false,
-  },
-  {
-    // Não é obrigatório setar qual o tipo de valor uma linha vai ter
-    // Caso o valor não for setado o limitlessfs identifica automatícamente
-    line: ['comprimento do jogo','comprimento do cartao'],
-    render: 'width',
-    //value: Number, // Não é necessário (Mas pode ser setado por segurança e maior precisão)
-  },
-  {
-    line: ['total de combinacoes','total de jogos'],
-    render: 'total',
-    require: false,
-    default: 1
-  },
-  {
-    line: ['numeros ordenados','em ordem'],
-    render: 'sorted',
-    require: false,
-    /* Nesse caso que a linha não é requerida e não ter o valor "default" definido, caso a linha
-       seja omitida e não tiver um valor informado, o limitlessfs o valor de 'sorted' para "null" */
-  },
-  {
-    line: ['pode repetir combinacoes','pode ter combinacoes repetidas'],
-    render: 'norepeat',
-    require: false,
-  },
-  {
-    line: ['nome do arquivo final','nome final do arquivo','arquivo de saida'],
-    render: 'filename',
-    /*
-    Se o "caseSensitive" estiver setado como true, ele não vai converter os valores da
-    linha para minúsculo
-    */
-    caseSensitive: true, // Case Sensitive para true
-    require: false,
-    default: 'rand'
-  },
-  {
-    line: ['abrir arquivo quando finalizar','abrir ao finalizar'],
-    render: 'openfileFinished',
-    require: false,
-  }]
-}
-
-limitlessfs._read('../configuraV3.txt')
-module.exports = limitlessfs
-```
-Arquivo `configuraV3.txt`:
+*Arquivo texto de configuração da aplicação - `entradas.txt`:*
 ```txt
 ## Arquivo de Configuração da Aplicação "rands.js"
 
@@ -293,15 +196,106 @@ Arquivo `configuraV3.txt`:
    Combinações a excluir = ''
 
 >> PERSONALIZAÇÃO...
-   Números ordenados               = sim
-   Pode repetir combinações?       = não
-   Abrir arquivo quando finalizar? = sim
+   Números ordenados                = sim
+   Pode repetir combinações?        = não
+   Abrir arquivo quando finalizar!? = sim
 
 >> FINALIZAÇÃO...
    Total de combinações  : 100
    Nome do arquivo final = Loterias
 ```
-Arquivo da Aplicação:
+
+*Arquivo JS de configuração separado do **limitlessfs** - `configLimitlessfs.js`:*
+
+```js
+const limitlessfs = require('./limitlessfs')
+
+// Personalizar as mensagens de ATENÇÃO e ERRO:
+aijr.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
+aijr.__msg.lineRequire = 'Coloque a linha "{0}" ai'
+aijr.__msg.emplyLineParam = 'ATENÇÃO: A linha ({0}) está "{1}". O valor será convertido para "{2}"'
+aijr.__msg.errorLineParam = 'ERRO no valor "{0}", passado como parâmetro da linha: {1}'
+aijr.__msg.emplyLineParamSetted = 'AVISO: A linha ({0}) de valor definido está "{1}". O valor será convertido para o "valor padrão".'
+
+// Personalizar as tags de comentário:
+limitlessfs.__defaultValues.comment = ['##','>>']
+
+limitlessfs._config = {
+  _separator: ['=',':'], // Como o arquivo txt tem dois tipos de separador, passamos os dois
+  _true: 'sim', // Reconhecer o tipo True
+  _false: 'nao', // Reconhecer o tipo False
+  _split: [' ate ',',',' a '], // Passando os separadores de Array
+  _ignoreCharacter: ['?','!'], // Strings que serão ignoradas/removida da leitura no arquivo
+  _blocks: [
+  {
+    line: 'numeros a cercar', // Identificando a linha
+    render: 'range', // Passando qual o nome do atributo no Objeto final. Ex: limitlessfs.range
+    value: Array // Tipo do valor do atributo
+  },
+  {
+    line: ['iteracao','pulo','avanco','sequencia'],
+    render: 'sequential',
+    value: Number,
+    require: false, // Informando que essa linha não será obrigatória 
+    default: 1 // O valor default do atributo, caso a linha não seja escrita
+  },
+  {
+    line: 'numeros fixos',
+    render: 'fixedNum',
+    value: Array,
+    require: false,
+  },
+  {
+    line: ['numeros excluidos','numeros a excluir','numeros removidos','numeros a remover'],
+    render: 'excludeNum',
+    value: Array,
+    require: false,
+  },
+  {
+    line: ['combinacoes a excluir','combinacoes excluidas','combinacoes para excluir'],
+    render: 'excludeCombinations',
+    require: false,
+  },
+  {
+    line: ['comprimento do jogo','comprimento do cartao'],
+    render: 'width',
+  },
+  {
+    line: ['total de combinacoes','total de jogos'],
+    render: 'total',
+    require: false,
+    default: 1
+  },
+  {
+    line: ['numeros ordenados','em ordem'],
+    render: 'sorted',
+    require: false,
+  },
+  {
+    line: ['pode repetir combinacoes','pode ter combinacoes repetidas'],
+    render: 'norepeat',
+    require: false,
+  },
+  {
+    line: ['nome do arquivo final','nome final do arquivo','arquivo de saida'],
+    render: 'filename',
+    // Por ser um nome, informando que o valor dessa linha deve ser preservado o Case Sensitive
+    caseSensitive: true,
+    require: false,
+    default: 'rand'
+  },
+  {
+    line: ['abrir arquivo quando finalizar','abrir ao finalizar'],
+    render: 'openfileFinished',
+    require: false,
+  }]
+}
+
+limitlessfs._read('../configuraV3.txt')
+module.exports = limitlessfs
+```
+
+Arquivo da Aplicação - `rands.js`:
 ```js
 const config = require('./configLimitlessfs')
 

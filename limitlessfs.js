@@ -334,7 +334,6 @@ module.exports = {
         number: 0,
         boolean: false,
         emplyLineParam: null,
-        emplyArrayLineParam: [],
         hideWarnMsg: false,
         encode: null
     },

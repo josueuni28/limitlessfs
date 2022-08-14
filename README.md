@@ -14,7 +14,6 @@ Leitor de arquivo de configuração personalizado para Node.js
 </ul>
 
 # como usar
-> *&nbsp;**README** em construção... Caso veja algum erro, por favor relate*
 <p>O <b>limitlessfs</b> foi pensado para ter um uso mais simples possível, sendo assim, com o mínimo de código você já consegue fazer a leitura do seu arquivo.</p>
 
 Exemplo do uso:

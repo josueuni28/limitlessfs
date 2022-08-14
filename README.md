@@ -291,7 +291,7 @@ limitlessfs._config = {
   }]
 }
 
-limitlessfs._read('../configuraV3.txt')
+limitlessfs._read('../entradas.txt')
 module.exports = limitlessfs
 ```
 

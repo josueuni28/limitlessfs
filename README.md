@@ -108,6 +108,67 @@ _blocks: [
 * `default`: *Any* | O valor padrão a ser atribuido, caso a linha não tenha sido escrita no arquivo.<br>
 * `caseSensitive`: *Boolean* | Se o *limitlessfs* respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo *(padrão)*. *Default:* `false`<br>
 
+# Mensagens e outras opções
+
+É possível personalizar as mensagens de erros e alertas que aparecem no `console`, você pode acessar as mensagens através do atributo `__msg.<nomeDaMsg>`. O *limitlessfs* possui três mensagens de erro e duas de alerta:
+```js
+/* Mensagens de Erro: */
+limitlessfs.__msg = {
+  fileNotFound: 'File "{0}" not found. Check file local',
+  lineRequire: 'Line {0} Required!',
+  errorLineParam: 'ERROR in param value "{0}", on line: {1}'
+}
+
+/* Mensagens de Alerta: */
+limitlessfs.__msg = {
+  emplyLineParam: 'WARN: Line ({0}) param value: "{1}". Converted for {2}',
+  emplyLineParamSetted: 'WARN: Line ({0}) with defined value has a "{1}" parameter. Converted for default value.'
+}
+```
+
+**IMPORTANTE**: Esteja ciente que os números dentro de chaves `{0}, {1} e {2}` são parâmentos é **não** devem ser removidos, de resto você pode fazem qualquer alteração na string.
+```js
+// Exemplo, modificando uma mensagem:
+limitlessfs.__msg.lineRequire = 'Linha {0} é obrigatória!'
+```
+## Opções e Valores defaults
+
+Através do atributo `__defaultValues.<nomeDaPropriedade>`, você pode manipular alguns comportamentos padrão do *limitlessfs*, segue toda a lista de propriedades acessíveis do `__defaultValues`:
+```js
+limitlessfs.__defaultValues: {
+  // Valores default do "_config = {}"
+  _separator: ':',
+  _removeQM: true,
+  _ignoreCharacter: '',
+  _split: ',',
+  _true: 'yes',
+  _false: 'no',
+  _ignoreCaseInSplit: true,
+  
+  // Valores default para o tipo do "value" para um linha ausente e que não é obrigatória
+  array: [],
+  string: '',
+  number: 0,
+  boolean: false,
+
+  // Valor default para uma linha ausente, sem o atributo "value" definido
+  emplyLineParam: null,
+
+  // Padrão de Identificação para uma linha de comentário. (você pode adicionar um Array de valores)
+  comment: '>>',
+
+  // Exibir ou ocultar as mensagens de "Alertas" no console.
+  hideWarnMsg: false,
+
+  // Tipo de encoder para ler o arquivo de configuração.
+  encode: null
+}
+```
+> Exemplo, modificando uma propriedade default:
+```js
+limitlessfs.__msg.hideWarnMsg = true
+```
+
 <p><b>README</b> Em Construção... Novas informações em breve.</p>
 
 # Exemplo (Provisório)

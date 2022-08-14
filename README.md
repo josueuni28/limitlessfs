@@ -135,7 +135,7 @@ limitlessfs.__msg.lineRequire = 'Linha {0} é obrigatória!'
 
 Através do atributo `__defaultValues.<nomeDaPropriedade>`, você pode manipular alguns comportamentos padrão do *limitlessfs*, segue toda a lista de propriedades acessíveis do `__defaultValues`:
 ```js
-limitlessfs.__defaultValues: {
+limitlessfs.__defaultValues = {
   // Valores default do "_config = {}"
   _separator: ':',
   _removeQM: true,

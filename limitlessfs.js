@@ -42,19 +42,12 @@ function isArray(param) {
     return Array.isArray(param)
 }
 function replaceChar(param) {
-    let repl = param.replace(/[áàã]/g,'a')
-    repl = repl.replace(/[éèê]/g,'e')
-    repl = repl.replace(/[íìî]/g,'i')
-    repl = repl.replace(/[óòõô]/g,'o')
-    repl = repl.replace(/[úùû]/g,'u')
-    repl = repl.replace(/[ç]/g,'c')
-
-    repl = repl.replace(/[ÁÀÃ]/g,'A')
-    repl = repl.replace(/[ÉÈÊ]/g,'E')
-    repl = repl.replace(/[ÍÌÎ]/g,'I')
-    repl = repl.replace(/[ÓÒÕÔ]/g,'O')
-    repl = repl.replace(/[ÚÙÛ]/g,'U')
-    repl = repl.replace(/[Ç]/g,'C')
+    let repl = param.replace(/[áàã]/gi,'a')
+    repl = repl.replace(/[éèê]/gi,'e')
+    repl = repl.replace(/[íìî]/gi,'i')
+    repl = repl.replace(/[óòõô]/gi,'o')
+    repl = repl.replace(/[úùû]/gi,'u')
+    repl = repl.replace(/[ç]/gi,'c')
 
     return repl
 }
@@ -180,13 +173,14 @@ module.exports = {
         this.__lines = this.__lines.filter(line => line.trim() && this.__isNotComment(line.trim()))
     },
     __splitKeys(){
-        let split = this.__defaultValues._separator
+        let split = (isArray(this.__defaultValues._separator)) ? new RegExp(gerateRegSplit(this.__defaultValues._separator), 'g') : this.__defaultValues._separator
 
-        if(!this.__isConfigEmpty('_separator') && isArray(this._config._separator)){
-            split = new RegExp(gerateRegSplit(this._config._separator),'g')
-        }else{
-            split = this._config._separator
-        }
+        if(!this.__isConfigEmpty('_separator'))
+            if(isArray(this._config._separator)){
+                split = new RegExp(gerateRegSplit(this._config._separator),'g')
+            }else{
+                split = this._config._separator
+            }
 
         for(const l in this.__lines) this.__lines[l] = reSplit(this.__lines[l], split).map(el => el.trim())
     },

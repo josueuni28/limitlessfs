@@ -306,6 +306,8 @@ const config = require('./configLimitlessfs')
 
 console.log(config)
 // Resultado no console:
+```
+```txt
 {
   range: [ 1, 31 ],
   sequential: 1,

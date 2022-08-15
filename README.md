@@ -116,8 +116,8 @@ _blocks: [
 * `caseSensitive`: *Boolean* | Se o *limitlessfs* respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo *(padrão)*. *Default:* `false`<br>
 
 > ## Nota Importante sobre o `line`
-> Para facilitar a leitura dos atributos das linhas no arquivo, por padrão o **limitlessfs** retira todas as acentuações e cedilha dos atributos e converte tudo para letras minúsculas.
-> Sendo assim, passar os parâmentos de uma linha em minúsculo, sem acentuação ou cedilha.
+> Para facilitar a leitura dos atributos das linhas no arquivo, por padrão o **limitlessfs** retira todas as acentuações e cedilha nos atributos e nas entradas do **line**, e converte tudo para letras minúsculas.
+> Sendo assim, você pode escrever da maneira que desejar nas entradas do *line*, sem se preucupar com `Case Sensitive` ou acentuação.
 
 > ## Nota sobre o `require` e `default`
 > Pode ocorrer uma situação em que se define uma linha como "require: false" e não passa o valor de "default" para a linha, nesse caso, se a linha não for escrita ou esteja sem valor, o *limitless* atribuirá o valor de `null`

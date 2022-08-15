@@ -189,6 +189,17 @@ module.exports = {
             this.__lines[l][0] = replaceChar(this.__lines[l][0].toLowerCase())
         }
     },
+    __convertLines(){
+        for (const blk in this._config._blocks) {
+            if(isArray(this._config._blocks[blk].line)){
+                for(const l in this._config._blocks[blk].line){
+                    this._config._blocks[blk].line[l] = replaceChar(this._config._blocks[blk].line[l]).toLowerCase()
+                }
+            }else{
+                this._config._blocks[blk].line = replaceChar(this._config._blocks[blk].line).toLowerCase()
+            }
+        }
+    },
     __analyValues(){
         for (const vli in this._config._blocks) {
             let searched = false
@@ -362,6 +373,7 @@ module.exports = {
         this.__removeBlanks() // REMOVE LINHAS VAZIAS
         this.__splitKeys()
         this.__convertKeys()
+        this.__convertLines()
         this.__analyValues()
         this.__convertValues()
         
@@ -371,6 +383,7 @@ module.exports = {
         delete this.__isBlockDefaultEmpty
         delete this.__caseSensitive
         delete this.__convertKeys
+        delete this.__convertLines
         delete this.__convertValues
         delete this.__defaultValues
         delete this.__defineDefaultValue

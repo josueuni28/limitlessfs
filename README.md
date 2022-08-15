@@ -13,12 +13,18 @@ Leitor de arquivo de configuração personalizado para Node.js
 <li>Simples de configurar</li>
 </ul>
 
-# como usar
+
+# Instalação
+```txt
+$ npm i limitlessfs
+```
+
+# Como usar
 <p>O <b>limitlessfs</b> foi pensado para ter um uso mais simples possível, sendo assim, com o mínimo de código você já consegue fazer a leitura do seu arquivo.</p>
 
 Exemplo do uso:
 ```js
-const limitlessfs = require('./limitlessfs') // Caminho do arquivo limitlessfs
+const limitlessfs = require('limitlessfs')
 
 limitlessfs._config = {
   _true: 'sim',
@@ -40,7 +46,7 @@ Exemplo:
 ```js
 // Arquivo configureLimitlessfs.js
 
-const limitlessfs = require('./limitlessfs')
+const limitlessfs = require('limitlessfs')
 
 limitlessfs._config = {
   _true: 'sim',
@@ -207,7 +213,7 @@ Veja o exemplo de uma configuração completa de uma aplicação para gerar sequ
 *Arquivo JS de configuração separado do **limitlessfs** - `configLimitlessfs.js`:*
 
 ```js
-const limitlessfs = require('./limitlessfs')
+const limitlessfs = require('limitlessfs')
 
 // Personalizar as mensagens de ATENÇÃO e ERRO:
 aijr.__msg.fileNotFound = 'Não encontrou o arquivo {0}'

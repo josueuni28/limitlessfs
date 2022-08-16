@@ -316,7 +316,7 @@ console.log(config)
   sequential: 1,
   fixedNum: [],
   excludeNum: [],
-  excludeCombinations: null,
+  excludeCombinations: '',
   width: 20,
   total: 100,
   sorted: true,

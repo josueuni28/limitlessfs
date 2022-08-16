@@ -85,10 +85,13 @@ O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é
 * `_false`: *String ~ Array* | Valor considerado como o **false**. *Default:* `no`<br>
 * `_split`: *String ~ Array* | Caractere que separa os valores de um Array. *Default:* `,`<br>
 * `_ignoreCharacter`: *String ~ Array* | Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
-* `_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `true`<br>
+* `_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `false`<br>
 * `_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
 * `_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.
 > <p><em><b>OBS:</b> Salvo o "_blocks", <strong>nenhuma</strong> opção dentro do ".config" é obrigatória.</em></p>
+
+> ## Nota sobre o `_removeQM`
+> Se o `_removeQM` for definido **true** e no arquivo existir uma linha com a entrada: `''` *(Vazia com aspas)*, como o `_removeQM` remove todas as aspas antes da leitura das linhas, o valor da entrada será considerado **`null`** e não uma "string vazia"
 
 # _blocks: []
 O `_blocks` é o responsável por saber como ler o seu arquivo. Ele é um `Array` onde cada *index* é responsável por uma linha do arquivo, e os *index* são preenchidos com um `Objeto` que leva as configurações.

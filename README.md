@@ -87,7 +87,7 @@ O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é
 * `_ignoreCharacter`: *String ~ Array* | Caracteres a serem ignorados e removidos antes da leitura do arquivo.<br>
 * `_removeQM`: *Boolean* | Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura. *Default:* `false`<br>
 * `_ignoreCaseInSplit`: *Boolean* | Não considera o Case-sensitive nos valores que separam um Array. *Default:* `true`<br>
-* `_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura das valores do arquivo.
+* `_blocks`: *Array* | **Obrigatório** Configura os parâmetros para a leitura dos valores do arquivo.
 > <p><em><b>OBS:</b> Salvo o "_blocks", <strong>nenhuma</strong> opção dentro do ".config" é obrigatória.</em></p>
 
 > ## Nota sobre o `_removeQM`
@@ -111,7 +111,7 @@ _blocks: [
 > Apenas os atributos `line` e `render` são obrigatórios, o restante das opções são opcionais.
 <p><strong>Definição dos atributos:</strong><p>
 
-* `line`: *String ~ Array* | A escrita linha no seu arquivo que leva o(s) valor(es). (Antes do `_separator`)<br>
+* `line`: *String ~ Array* | A linha no seu arquivo que leva o(s) valor(es). (Antes do `_separator`)<br>
 * `render`: *String* | O nome da linha que será *"renderizado"* no Objeto final.<br>
 * `value`: *Property* | Os valores são: `String`, `Number`, `Array`, `Boolean`, `null`. É o tipo do valor a ser atribuido a linha. Caso esse atributo não seja definido, o próprio *limitlessfs* buscará tipo do valor.<br>
 * `require`: *Boolean* | Se a linha é obrigatória ou não. *Default:* `true`<br>

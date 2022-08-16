@@ -1,6 +1,6 @@
 {
   "name": "limitlessfs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Custom configuration file reader",
   "main": "limitlessfs.js",
   "scripts": {

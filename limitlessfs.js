@@ -60,6 +60,13 @@ function WARN(msg) {
 function ThisIsANumber(value) {
     return !Number.isNaN(Number(value))
 }
+function isEmply(line) {
+    if(line[0] == '\'' || line[0] == '"'){
+        const r = line.replace(/ +/g,'')
+        if(r.length <= 2) return true
+    }
+    return false
+}
 
 module.exports = {
     __isNotComment(value){
@@ -144,7 +151,7 @@ module.exports = {
         }
     },
     __removeQMarks() {
-        if(this.__isConfigEmpty('_removeQM') || this.__isDefaultValueConfig('_removeQM')){
+        if(!this.__isConfigEmpty('_removeQM') && !this.__isDefaultValueConfig('_removeQM')){
             this.__txt = this.__txt.replaceAll(/["']/g,'')
         }
     },
@@ -254,7 +261,7 @@ module.exports = {
 
             if(!lineVal){
                 if(require){
-                    ERROR(format(this.__msg.lineRequire, keyName))
+                    ERROR(format(this.__msg.lineRequire, line))
                 }else{
                     // Verifica se a linha já foi setada para null no __checkValue()
                     if(this[keyName] != null){
@@ -320,14 +327,18 @@ module.exports = {
             }else if(value == null){
                 this[keyName] = null
             }else{ // val === String
-                this[keyName] = lineVal
+                if(isEmply(lineVal)){
+                    this[keyName] = ''
+                }else{
+                    this[keyName] = lineVal
+                }
             }
         }
     },
     __txt: '',
     __defaultValues: {
         _separator: ':',
-        _removeQM: true,
+        _removeQM: false,
         _ignoreCharacter: '',
         _split: ',',
         _true: 'yes',

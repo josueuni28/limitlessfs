@@ -155,7 +155,7 @@ Através do atributo `__defaultValues.<nomeDaPropriedade>`, você pode manipular
 limitlessfs.__defaultValues = {
   // Valores default do "_config = {}"
   _separator: ':',
-  _removeQM: true,
+  _removeQM: false,
   _ignoreCharacter: '',
   _split: ',',
   _true: 'yes',

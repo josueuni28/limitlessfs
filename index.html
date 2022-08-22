@@ -4,10 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limitless - Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Limitlessfs - Documentation</title>
 </head>
 <body>
-    <h1>Prefácil</h1>
-    <p>Limitlessfs é um módulo Node.js que facilita a leitura de arquivos de configuração.</p>
+    <header>
+        <h1>Limitlessfs</h1>
+        <p>Um módulo <em>Node.js</em> que facilita a leitura de arquivos de configuração para a sua aplicação.</p>
+    </header>
+    <nav>
+        <a href="#instalar">Instalação</a>
+        <a href="#comecar">Começando</a>
+    </nav>
+    <main>
+        <article>
+            <div class="block">
+                <h2><a id="instalar" href="#instalar">Instalação</a></h2>
+                <section>
+                    Para instalar o <strong>Limitlessfs</strong> use o comando:
+                    <div class="code">
+                        <pre>$ npm i limitlessfs</pre>
+                    </div>
+                </section>
+            </div>
+            <div class="block">
+                <h2><a id="comecar" href="#comecar">Começando</a></h2>
+                <section>
+                    O limitlessfs foi pensado para ter um uso mais simples possível, sendo assim, com o mínimo de código você já consegue fazer a leitura do seu arquivo.
+                    <br><br>
+                    Exemplo do uso:
+                    <div class="code">
+                        <pre>
+const limitlessfs = require('limitlessfs')
+
+limitlessfs._config = {
+    _true: 'sim',
+    _false: 'nao',
+    _blocks: [
+        /* Configuração das linhas do seu arquivo */
+    ]
+}
+
+limitlessfs._read('./arquivo.txt') // Caminho do seu arquivo de configuração
+
+// Após o _read() a constante será convertida em um objeto, com os valores que você definiu no "_blocks"
+console.log(limitlessfs)
+                        </pre>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+    <footer>Limitlessfs v1.3.0</footer>
 </body>
 </html>

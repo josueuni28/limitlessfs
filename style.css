@@ -1,0 +1,88 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 1.05em;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+
+main {
+    grid-area: conteudo;
+    background-color: aqua;
+    padding: 10px;
+}
+header {
+    grid-area: cabecalho;
+    background-color: blueviolet;
+    padding: 20px;
+}
+nav {
+    grid-area: navegacao;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    /* width: 50%; */
+}
+nav a{
+    background-color: rgb(197, 86, 46);
+    padding: 10px 0px 10px 7px;
+    color: white;
+}
+nav a:hover {
+    background-color: black;
+    color: yellow;
+}
+
+footer {
+    grid-area: rodape;
+    background-color: chartreuse;
+    padding: 20px;
+}
+
+body {
+    font-family: 'Bitter', serif;
+    display: grid;
+
+    min-height: 100vh;
+    /* max-width: 100vw ; */
+    /* min-width: 100vw ; */
+    grid-template-columns: 300px calc(100% - 300px);
+    grid-template-rows: 0fr 1fr 100px;
+
+    grid-template-areas: 
+        'cabecalho cabecalho'
+        'navegacao conteudo'
+        'rodape rodape';
+}
+
+h1 {
+    font-size: 3.0em;
+}
+h2 {
+    font-size: 1.7em;
+}
+header p {
+    font-size: 1.5em;
+}
+
+.code {
+    margin: 10px;
+    overflow: auto ;
+    position: relative ;
+}
+
+.code pre {
+    background-color: gainsboro;
+    padding: 10px;
+}
+
+pre{
+    overflow: auto;
+    font-size: 0.95em;
+    line-height: 1.3em;
+    word-spacing: -0.2em;
+}

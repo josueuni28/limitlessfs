@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./github.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="./highlight.min.js"></script>
     <title>Limitlessfs - Documentation</title>
 </head>
 <body>
@@ -14,8 +16,10 @@
         <p>Um módulo <em>Node.js</em> que facilita a leitura de arquivos de configuração para a sua aplicação.</p>
     </header>
     <nav>
+        <div id="nav">
         <a href="#instalar">Instalação</a>
         <a href="#comecar">Começando</a>
+        </div>
     </nav>
     <main>
         <article>
@@ -23,7 +27,7 @@
                 <h2><a id="instalar" href="#instalar">Instalação</a></h2>
                 <section>
                     Para instalar o <strong>Limitlessfs</strong> use o comando:
-                    <div class="code">
+                    <div class="code language-plaintext">
                         <pre>$ npm i limitlessfs</pre>
                     </div>
                 </section>
@@ -34,7 +38,7 @@
                     O limitlessfs foi pensado para ter um uso mais simples possível, sendo assim, com o mínimo de código você já consegue fazer a leitura do seu arquivo.
                     <br><br>
                     Exemplo do uso:
-                    <div class="code">
+                    <div class="code language-javascript">
                         <pre>
 const limitlessfs = require('limitlessfs')
 
@@ -48,7 +52,7 @@ limitlessfs._config = {
 
 limitlessfs._read('./arquivo.txt') // Caminho do seu arquivo de configuração
 
-// Após o _read() a constante será convertida em um objeto, com os valores que você definiu no "_blocks"
+// Após o _read() a constante está pronta para ser usada!
 console.log(limitlessfs)
                         </pre>
                     </div>
@@ -57,5 +61,6 @@ console.log(limitlessfs)
         </article>
     </main>
     <footer>Limitlessfs v1.3.0</footer>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>

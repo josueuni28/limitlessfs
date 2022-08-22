@@ -71,7 +71,7 @@ console.log(limitlessfs)
 ```
 Dessa maneira todas as configurações não ficam juntas da sua aplicação :relaxed:
 
-# Opções do .config = {}
+# .config = { *attributes...* }
 ```js
 limitlessfs.config = {
   /* Sua opções do config aqui... */
@@ -93,7 +93,7 @@ O objeto `.config` é o principal atributo para configurar o **limitlessfs**, é
 > ## Nota sobre o `_removeQM`
 > Se o `_removeQM` for definido **true** e no arquivo existir uma linha com a entrada: `''` *(Vazia com aspas)*, como o `_removeQM` remove todas as aspas antes da leitura das linhas, o valor da entrada será considerado **`null`** e não uma "string vazia"
 
-# _blocks: []
+# _blocks: [ *Objects...* ]
 O `_blocks` é o responsável por saber como ler o seu arquivo. Ele é um `Array` onde cada *index* é responsável por uma linha do arquivo, e os *index* são preenchidos com um `Objeto` que leva as configurações.
 ```js
 _blocks: [
@@ -185,6 +185,18 @@ limitlessfs.__defaultValues = {
 ```js
 limitlessfs.__msg.hideWarnMsg = true
 ```
+
+# ._read( *filename* , *encode* )
+O `_read()` deve ser chamado sempre depois de todas as configurações.<br>
+Ele pode receber duas entradas, o **nome do arquivo** para fazer a leitura (Obrigatório) e o tipo de **codificação** (Opcional).<br>
+Veja o exemplo:
+
+```js
+limitlessfs._read('meuArquivo.txt', 'ascii')
+```
+
+> ### **Curiosidade:**
+> O limitlessfs também lê arquivos `.json`
 
 # Exemplo completo
 Veja o exemplo de uma configuração completa de uma aplicação para gerar sequências aleatórias, e o arquivo `.txt` que é possível ler, aplicando essas configurações:<br>

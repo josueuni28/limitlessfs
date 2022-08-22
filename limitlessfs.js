@@ -335,6 +335,38 @@ module.exports = {
             }
         }
     },
+    __goRead(file, enc){
+        // Permitir ler em codificações diferentes, como utf-8 e ascii
+        this.__txt = readFileSync(file, {encoding: enc}).toString()
+
+        const arqext = file.toLowerCase().slice(-5)
+        // Verifica se é JSON
+        if(arqext == '.json'){
+            const fjson = JSON.parse(this.__txt)
+            for(let j in fjson) this[j] = fjson[j]
+            
+        }else{
+            if(!this.__isConfigEmpty('_ignoreCharacter') && !this.__isDefaultValueConfig('_ignoreCharacter')){
+                let igc = ''
+                if(isArray(this._config._ignoreCharacter)){
+                    igc = gerateRegSplit(this._config._ignoreCharacter)
+                }else{
+                    igc = '('+this._config._ignoreCharacter+')'
+                }
+                const regex = new RegExp(igc,'g')
+                this.__txt = this.__txt.replace(regex,'')
+            }
+
+            this.__removeQMarks()
+            this.__lines = this.__txt.split(/\r?\n/g)
+            this.__removeBlanks() // REMOVE LINHAS VAZIAS
+            this.__splitKeys()
+            this.__convertKeys()
+            this.__convertLines()
+            this.__analyValues()
+            this.__convertValues()
+        }
+    },
     __txt: '',
     __defaultValues: {
         _separator: ':',
@@ -350,8 +382,7 @@ module.exports = {
         number: 0,
         boolean: false,
         emplyLineParam: null,
-        hideWarnMsg: false,
-        encode: null
+        hideWarnMsg: false
     },
     __lines: [],
     _config: {},
@@ -362,31 +393,10 @@ module.exports = {
         emplyLineParamSetted: 'WARN: Line ({0}) with defined value has a "{1}" parameter. Converted for default value.',
         errorLineParam: 'ERROR in param value "{0}", on line: {1}'
     },
-    _read(arq){
+    _read(arq, encode = null){
         if(!existsSync(arq)) ERROR(format(this.__msg.fileNotFound, arq))
 
-        // Permitir ler em codificações diferentes, como utf-8 e ascii
-        this.__txt = readFileSync(arq, {encoding: this.__defaultValues.encode}).toString()
-
-        if(!this.__isConfigEmpty('_ignoreCharacter') && !this.__isDefaultValueConfig('_ignoreCharacter')){
-            let igc = ''
-            if(isArray(this._config._ignoreCharacter)){
-                igc = gerateRegSplit(this._config._ignoreCharacter)
-            }else{
-                igc = '('+this._config._ignoreCharacter+')'
-            }
-            const regex = new RegExp(igc,'g')
-            this.__txt = this.__txt.replace(regex,'')
-        }
-
-        this.__removeQMarks()
-        this.__lines = this.__txt.split(/\r?\n/g)
-        this.__removeBlanks() // REMOVE LINHAS VAZIAS
-        this.__splitKeys()
-        this.__convertKeys()
-        this.__convertLines()
-        this.__analyValues()
-        this.__convertValues()
+        this.__goRead(arq, encode)
         
         delete this.__analyValues
         delete this.__removeQMarks
@@ -410,6 +420,7 @@ module.exports = {
         delete this.__splitKeys
         delete this._config
         delete this.__msg
+        delete this.__goRead
         delete this._read
     }
 }

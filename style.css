@@ -11,17 +11,17 @@ a{
 
 main {
     grid-area: conteudo;
-    background-color: aqua;
+    background-color: white;
     padding: 10px;
 }
 header {
     grid-area: cabecalho;
-    background-color: blueviolet;
+    background-color: white;
     padding: 20px;
 }
 nav {
     grid-area: navegacao;
-    background-color: brown;
+    background-color: white;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -33,19 +33,21 @@ nav a{
     color: white;
 }
 nav a:hover {
-    background-color: black;
-    color: yellow;
+    background-color: #8b2100;
 }
 
 footer {
     grid-area: rodape;
-    background-color: chartreuse;
+    background-image: linear-gradient(180deg, chartreuse, #a8d773);
     padding: 20px;
+    font-style: italic;
+    color: darkgreen;
 }
 
 body {
     font-family: 'Bitter', serif;
     display: grid;
+    color: #444;
 
     min-height: 100vh;
     /* max-width: 100vw ; */
@@ -64,6 +66,10 @@ h1 {
 }
 h2 {
     font-size: 1.7em;
+    line-height: 1.7em;
+}
+h2 a {
+    color: chocolate;
 }
 header p {
     font-size: 1.5em;
@@ -73,6 +79,7 @@ header p {
     margin: 10px;
     overflow: auto ;
     position: relative ;
+    box-shadow: 0px 0px 2px black;
 }
 
 .code pre {
@@ -85,4 +92,13 @@ pre{
     font-size: 0.95em;
     line-height: 1.3em;
     word-spacing: -0.2em;
+    color: black;
+}
+
+.block {
+    display: table;
+    width: 100%;
+    margin-bottom: 30px;
+    border-left: 2px solid #cba36f;
+    padding-left: 10px;
 }

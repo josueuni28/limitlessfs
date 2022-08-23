@@ -13,16 +13,27 @@ main {
     grid-area: conteudo;
     background-color: white;
     padding: 10px;
+    line-height: 1.6em;
 }
+
+sup {
+    font-style: italic;
+    font-size: 0.6em;
+    font-weight: 100;
+    margin-left: 15px;
+}
+
 header {
     grid-area: cabecalho;
     background-color: white;
     padding: 20px;
+    margin-bottom: 30px;
 }
 #nav {
     display: flex;
     flex-direction: column;
     top: 5px;
+    position: -webkit-sticky; /* Para funcionar no browser Safari */
     position: sticky;
 }
 nav {
@@ -34,20 +45,27 @@ nav {
     /* width: 50%; */
 }
 nav a{
-    background-color: rgb(197, 86, 46);
+    background-color: #9c27b0;
     padding: 10px 0px 10px 7px;
     color: white;
 }
 nav a:hover {
-    background-color: #8b2100;
+    background-color: #4a148c;
 }
 
 footer {
     grid-area: rodape;
-    background-color: chartreuse;
+    background-color: #f1f1f1;
     padding: 20px;
     font-style: italic;
-    color: darkgreen;
+    color: #666;
+    text-align: center;
+    border-top: 1px solid #e1bee7;
+}
+
+footer a {
+    color: #939393;
+    text-decoration: underline;
 }
 
 body {
@@ -70,15 +88,19 @@ body {
 h1 {
     font-size: 3.0em;
 }
+h1 sup {
+    color: #888;
+}
 h2 {
     font-size: 1.7em;
     line-height: 1.7em;
 }
 h2 a {
-    color: chocolate;
+    color: #9c27b0;
 }
 header p {
     font-size: 1.5em;
+    margin-top: 15px;
 }
 
 .code {
@@ -104,7 +126,43 @@ pre{
 .block {
     display: table;
     width: 100%;
-    margin-bottom: 30px;
-    border-left: 2px solid #cba36f;
+    margin-bottom: 50px;
+    border-left: 2px solid #ce93d8;
     padding-left: 10px;
+}
+
+.block p {
+    margin-bottom: 30px;
+}
+
+ul {
+    padding-inline-start: 40px;
+}
+h3 {
+    font-size: 1.3em;
+    border-bottom: 1px solid #ce93d8;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+li {
+    margin: 6px 0;
+    font-size: 1em;
+}
+
+span.dt {
+    font-size: 1em;
+    color: #3949ab;
+}
+
+em {font-size: 1em;}
+
+blockquote {
+    margin: 20px;
+    padding: 20px;
+    background-color: antiquewhite;
+    border-left: 2px solid brown;
+    font-size: 0.9em;
+}
+.ptop {
+    margin-top: 20px;
 }

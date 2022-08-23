@@ -12,12 +12,13 @@
 </head>
 <body>
     <header>
-        <h1>Limitlessfs</h1>
+        <h1>Limitlessfs<sup>Docs</sup></h1>
         <p>Um módulo <em>Node.js</em> que facilita a leitura de arquivos de configuração para a sua aplicação.</p>
     </header>
     <nav>
         <div id="nav">
         <a href="#instalar">Instalação</a>
+        <a href="#sobrelimitlessfs">Sobre o limitlessfs</a>
         <a href="#comecar">Começando</a>
         </div>
     </nav>
@@ -30,6 +31,24 @@
                     <div class="code language-plaintext">
                         <pre>$ npm i limitlessfs</pre>
                     </div>
+                </section>
+            </div>
+            <div class="block">
+                <h2><a id="sobrelimitlessfs" href="#sobrelimitlessfs">O que faz o limitlessfs?</a></h2>
+                <section>
+                    <p>O Limitlessfs lê arquivos personalizados que são usados para configurar sua Aplicação. O nome "<em>limitless</em>" deriva da capacidade "reconhecer" multíplos padrões em um arquivo.</p>
+                    <p>Pode ser usado como alternativa para o <strong>JSON</strong>, se você tem ou precisa de um arquivo de configuração com poucas regras e simplificado, ou desejar usar padrões que não são permitidos no <em>JSON</em>, como <strong>comentários</strong>, por exemplo.</p>
+                    <h3>Características principais</h3>
+                    <ul>
+                        <li>Múltiplos separadores</li>
+                        <li>Comentários (Com tags personalizadas)</li>
+                        <li>Ignora linhas vazias no arquivo</li>
+                        <li>Atributos e valores podem ser opcionais</li>
+                        <li>Definir valores padrão nos atributos</li>
+                        <li>Mensagens de Erro e Alerta personalizados</li>
+                        <li>Identifica o tipo dos valores <em>(<span class="dt">String</span>, <span class="dt">Number</span>, <span class="dt">Array</span> etc)</em> automaticamente</li>
+                        <li>Simples de configurar</li>
+                    </ul>
                 </section>
             </div>
             <div class="block">
@@ -56,11 +75,46 @@ limitlessfs._read('./arquivo.txt') // Caminho do seu arquivo de configuração
 console.log(limitlessfs)
                         </pre>
                     </div>
+                    <blockquote><q>
+                        <strong>DICA:</strong> O objeto <strong>._config</strong> por vezes, pode ficar extenso dependendo da quantidade de linhas que o seu arquivo de configuração tem. Por esse motivo, é aconselhado, definir toda a configuração do <strong>limitlessfs</strong> em um arquivo separado da sua aplicação para não misturar com o seu código, e depois importá-lo em seu projeto.
+                    </q></blockquote>
+                    Veja um exemplo:
+                    <div class="code language-javascript">
+                        <pre>
+/* Arquivo configureLimitlessfs.js */
+
+const limitlessfs = require('limitlessfs')
+                            
+limitlessfs._config = {
+    _true: 'sim',
+    _false: 'nao',
+    _blocks: [
+        /* Configuração das linhas... */
+    ]
+}
+                            
+limitlessfs._read('./arquivo.txt')
+                            
+// Permitindo a exportação...
+module.exports = limitlessfs
+                        </pre>
+                    </div>
+                    <div class="code language-javascript">
+<pre>
+/* No seu Projeto... */
+
+const limitlessfs = require('./configureLimitlessfs')
+    
+// A constante está pronta para ser usada como objeto na sua Aplicação!
+console.log(limitlessfs)
+</pre>
+                    </div>
+                    <p class="ptop"><em>Dessa maneira as configurações não ficam juntas da sua aplicação</em> &#128522;</p>
                 </section>
             </div>
         </article>
     </main>
-    <footer>Limitlessfs v1.3.0</footer>
+    <footer>Limitlessfs - Documentation v1.3.0 by <a href="https://github.com/josueuni28">@josueuni28</a></footer>
     <script>hljs.highlightAll();</script>
 </body>
 </html>

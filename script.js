@@ -12,3 +12,24 @@ window.onscroll = function(e){
         }
     })
 }
+
+const btn = document.querySelector('#btnMenu')
+const nav = document.querySelector('nav')
+const body = document.querySelector('body')
+let menu = 0
+
+body.onclick = () => {
+    menu++
+    //console.log('body',menu)
+    if(menu > 2) {
+        btn.style.display = 'block'
+        nav.style.display = 'none'
+        menu = 0
+    }
+}
+btn.onclick = () => {
+    ++menu
+    //console.log('btn',menu)
+    btn.style.display = 'none'
+    nav.style.display = 'block'
+}

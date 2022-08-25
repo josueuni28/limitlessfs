@@ -20,6 +20,10 @@
         <a href="#instalar">Instalação</a>
         <a href="#sobrelimitlessfs">Sobre o limitlessfs</a>
         <a href="#comecar">Começando</a>
+        <a href="#attrconfig">.config</a>
+        <a href="#blocks">_blocks</a>
+        <a href="#mensagensopcoes">Mensagens & Preferências</a>
+        <a href="#read">._read()</a>
         </div>
     </nav>
     <main>
@@ -80,7 +84,7 @@ console.log(limitlessfs)
                     </q></blockquote>
                     Veja um exemplo:
                     <div class="code language-javascript">
-                        <pre>
+<pre>
 /* Arquivo configureLimitlessfs.js */
 
 const limitlessfs = require('limitlessfs')
@@ -97,7 +101,7 @@ limitlessfs._read('./arquivo.txt')
                             
 // Permitindo a exportação...
 module.exports = limitlessfs
-                        </pre>
+</pre>
                     </div>
                     <div class="code language-javascript">
 <pre>
@@ -112,9 +116,245 @@ console.log(limitlessfs)
                     <p class="ptop"><em>Dessa maneira as configurações não ficam juntas da sua aplicação</em> &#128522;</p>
                 </section>
             </div>
+            <div class="block">
+                <h2><a id="attrconfig" href="#attrconfig">.config = { <span class="attrs">attributes...</span> }</a></h2>
+                <section>
+                    <div class="code language-javascript">
+<pre>
+limitlessfs.config = {
+    /* Suas opções do config aqui... */
+
+    _blocks: []
+}
+</pre>
+                    </div>
+                    <p>
+                        O objeto <code>.config</code> é o principal atributo para configurar o <strong>limitlessfs</strong>, é através dele que você tem acesso ao atributo <em class="ref">_blocks</em> que define a leitura das linhas do seu arquivo, e o <code>.config</code> também tem várias <strong>opções</strong> opcionais para personalizar a leitura do arquivo, são elas:
+                    </p>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_separator:</span> <span class="types">String</span> or <span class="types">Array</span> | Default: <code>:</code></h4>
+                        <description>
+                            Caractere que separa os atributos dos valores do arquivo.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_true:</span> <span class="types">String</span> or <span class="types">Array</span> | Default: <code>yes</code></h4>
+                        <description>
+                            Valor considerado como o <strong>true</strong>.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_false:</span> <span class="types">String</span> or <span class="types">Array</span> | Default: <code>no</code></h4>
+                        <description>
+                            Valor considerado como o <strong>false</strong>.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_split:</span> <span class="types">String</span> or <span class="types">Array</span> | Default: <code>,</code></h4>
+                        <description>
+                            Caractere que separa os valores de um Array.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_ignoreCharacter:</span> <span class="types">String</span> or <span class="types">Array</span></h4>
+                        <description>
+                            Caracteres a serem ignorados e removidos antes da leitura do arquivo.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_removeQM:</span> <span class="types">Boolean</span> | Default: <code>false</code></h4>
+                        <description>
+                            Remover todas as "aspas" (simples e duplas) do arquivo antes da leitura.
+                        </description>
+                    </div>
+                    <blockquote>
+                        <h3>Nota sobre o _removeQM</h3>
+                        <p>
+                            Se o _removeQM for definido <strong>true</strong> e no arquivo existir uma linha com a entrada: <code>''</code> (Vazia com aspas), como o _removeQM remove todas as aspas antes da leitura das linhas, o valor da entrada será considerado <strong>null</strong> e não uma "string vazia"
+                        </p>
+                    </blockquote>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">_ignoreCaseInSplit:</span> <span class="types">Boolean</span> | Default: <code>true</code></h4>
+                        <description>
+                            Não considera o Case-sensitive nos valores que separam um Array.
+                        </description>
+                    </div>
+                    <!-- <div class="attributes">
+                        <h4 class="setted"><span class="attr">_blocks:</span> <span class="types">Array</span></h4>
+                        <description>
+                            Configura os parâmetros para a leitura dos valores do arquivo.
+                        </description>
+                    </div> -->
+                    
+                </section>
+            </div>
+            <div class="block">
+                <h2><a id="blocks" href="#blocks">_blocks: [ <span class="attrs">Objects...</span> ]</a></h2>
+                <section>
+                    O <code>_blocks</code> é o atributo obrigatório do <em class="ref">.config</em>, sendo responsável por saber como ler cada linha do seu arquivo. Ele é um <span class="dt">Array</span> onde cada index é responsável por uma linha do arquivo, e os index são preenchidos com um <strong>Objeto</strong> que leva os atributos <code>line</code> e <code>render</code> (<strong>obrigatórios</strong>) e outras opções opcionais.
+                    <p><div class="code language-javascript">
+<pre>
+_blocks: [
+    {
+        line:
+        render:
+
+        /* Outras opções opcionais */
+    },
+    // ...
+]
+</pre>
+                    </div></p>
+                    <p>Definição de todos atributos:</p>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">line:</span> <span class="types">String</span> or <span class="types">Array</span> <span class="required">Required</span></h4>
+                        <description>
+                            A linha no seu arquivo de configuração que leva o(s) valor(es). (Antes do <em class="ref">_separator</em>)
+                        </description>
+                    </div>
+                    <blockquote>
+                        <h3>Nota Importante sobre o line</h3>
+                        <p>
+                            Para facilitar a leitura dos atributos das linhas no arquivo, por padrão o <strong>limitlessfs</strong> retira todas as acentuações e cedilha nos atributos e nas entradas do line, e converte tudo para letras minúsculas. Sendo assim, você pode escrever da maneira que desejar nas entradas do line, sem se preucupar com <code>Case Sensitive</code> ou acentuação.
+                        </p>
+                    </blockquote>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">render:</span> <span class="types">String</span> <span class="required">Required</span></h4>
+                        <description>
+                            O nome da linha que será "renderizado" como um atributo no Objeto final.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">value:</span> <span class="types">Property type</span></h4>
+                        <description>
+                            É o tipo do valor a ser atribuido a linha. Os valores são: <code>String</code>, <code>Number</code>, <code>Array</code>, <code>Boolean</code> ou <code>null</code>. Caso esse atributo não seja definido, o próprio <strong>limitlessfs</strong> buscará tipo do valor.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">require:</span> <span class="types">Boolean</span> | Default: <code>true</code></h4>
+                        <description>
+                            Se a linha é obrigatória ou não.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">default:</span> <span class="types">Any</span></h4>
+                        <description>
+                            O valor padrão a ser definido no atributo, caso a linha não tenha sido escrita no arquivo.
+                        </description>
+                    </div>
+                    <div class="attributes">
+                        <h4 class="setted"><span class="attr">caseSensitive:</span> <span class="types">Boolean</span> | Default: <code>false</code></h4>
+                        <description>
+                            Se o limitlessfs respeitará a diferença entre letras maiúsculas e minúsculas dos valores da linha, e não converterá todos os valores para minúsculo (padrão).
+                        </description>
+                    </div>
+                    <blockquote>
+                        <h3>Nota sobre os atributos <em class="ref">require</em> e <em class="ref">default</em></h3>
+                        <p>
+                            Pode ocorrer uma situação em que se define uma linha como <code>require: false</code> e não passa o valor de "<strong>default:</strong>" para a linha, nesse caso, se a linha não for escrita ou esteja sem valor, o limitless atribuirá o valor de <code>null</code>.
+                        </p>
+                    </blockquote>
+                </section>
+            </div>
+            <div class="block">
+                <h2><a id="mensagensopcoes" href="#mensagensopcoes">Mensagens e preferências</a></h2>
+                <section>
+                    <p>
+                        É possível personalizar as mensagens de erros e alertas que aparecem no <code>console</code>, você pode acessar as mensagens através do atributo <code>__msg.(message)</code>. O <strong>limitlessfs</strong> possui três mensagens de erro e duas de alerta:
+                    </p>
+                    <div class="code language-javascript">
+<pre>
+/* Mensagens de Erro: */
+limitlessfs.__msg = {
+    fileNotFound: 'File "{0}" not found. Check file local',
+    lineRequire: 'Line {0} Required!',
+    errorLineParam: 'ERROR in param value "{0}", on line: {1}'
+}
+
+/* Mensagens de Alerta: */
+limitlessfs.__msg = {
+    emplyLineParam: 'WARN: Line ({0}) param value: "{1}". Converted for {2}',
+    emplyLineParamSetted: 'WARN: Line ({0}) with defined value has a "{1}" parameter. Converted for default value.'
+}
+</pre>
+                    </div>
+                    <p>
+                        <strong>IMPORTANTE:</strong> Os números dentro de chaves <code>{0}</code>, <code>{1}</code> e <code>{2}</code> são parâmentos é não devem ser removidos, de resto você pode fazem qualquer alteração na string.
+                    </p>
+                    <p>
+                    <div class="code language-javascript">
+<pre>
+// Exemplo, modificando uma mensagem:
+limitlessfs.__msg.lineRequire = 'Linha {0} é obrigatória!'
+</pre>
+                    </div>
+                    </p>
+                    <h3>Preferências e Valores defaults</h3>
+                    <p>
+                        Através do atributo <code>__defaultValues.(nomeDaPropriedade)</code>, você pode manipular alguns comportamentos padrão do limitlessfs, segue toda a lista de propriedades acessíveis do <code>__defaultValues</code>:
+                    </p>
+                    <div class="code language-javascript">
+<pre>
+limitlessfs.__defaultValues = {
+    // Valores default do "_config = {}"
+    _separator: ':',
+    _removeQM: false,
+    _ignoreCharacter: '',
+    _split: ',',
+    _true: 'yes',
+    _false: 'no',
+    _ignoreCaseInSplit: true,
+    
+    // Valores default para o tipo do "value" para um linha ausente e que não é obrigatória
+    array: [],
+    string: '',
+    number: 0,
+    boolean: false,
+    
+    // Valor default para uma linha ausente, sem o atributo "value" definido
+    emplyLineParam: null,
+    
+    // Padrão de Identificação para uma linha de comentário. (você pode adicionar um Array de valores)
+    comment: '>>',
+    
+    // Exibir ou ocultar as mensagens de "Alertas" no console.
+    hideWarnMsg: false
+    }
+</pre>
+                    </div>
+                    <em>Exemplo, modificando uma propriedade <strong>default</strong>:</em>
+                    <div class="code language-javascript">
+<pre>
+limitlessfs.__msg.hideWarnMsg = true
+</pre>
+                    </div>
+                </section>
+            </div>
+            <div class="block">
+                <h2><a id="read" href="#read">._read( <span class="attrs">filename</span> , <span class="attrs">encode</span> )</a></h2>
+                <section>
+                    <p>
+                    O <code>_read()</code> deve ser chamado sempre depois de todas as configurações.<br>
+                    Ele pode receber duas entradas, o <strong>nome do arquivo</strong> para fazer a leitura (Obrigatório) e o tipo de <strong>codificação</strong> (Opcional).
+                    </p>
+                    <em>
+                        Veja o exemplo:
+                    </em>
+                    <div class="code language-javascript">
+<pre>
+limitlessfs._read('meuArquivo.txt', 'ascii')
+</pre>
+                    </div>
+                    <blockquote>
+                        <h3>Curiosidade:</h3>
+                            O limitlessfs também lê arquivos <code>.json</code> &#128077
+                    </blockquote>
+                </section>
+            </div>
         </article>
     </main>
-    <footer>Limitlessfs - Documentation v1.3.0 by <a href="https://github.com/josueuni28">@josueuni28</a></footer>
+    <footer>Limitlessfs v1.3.0 - Documentation by <a href="https://github.com/josueuni28">@josueuni28</a></footer>
     <script>hljs.highlightAll();</script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -22,14 +22,14 @@ body.onclick = () => {
     menu++
     //console.log('body',menu)
     if(menu > 2) {
-        btn.style.display = 'block'
-        nav.style.display = 'none'
+        //btn.style.display = 'block'
+        nav.setAttribute('style','')
         menu = 0
     }
 }
 btn.onclick = () => {
     ++menu
     //console.log('btn',menu)
-    btn.style.display = 'none'
+    //btn.style.display = 'none'
     nav.style.display = 'block'
 }

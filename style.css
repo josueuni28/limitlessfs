@@ -265,6 +265,13 @@ button.menu {
         'conteudo'
         'rodape';
     }
+    .block {
+        border-left: 0px;
+        border-bottom: 1px solid #ce93d8;
+    }
+    h3 {
+        border-bottom: 0;
+    }
     nav {
         display: none;
         position: fixed;
@@ -272,8 +279,9 @@ button.menu {
         right: 0px;
         z-index: 9999;
         height: 100vh;
-        width: 60%;
+        width: 90%;
         border-left: 1px solid #dbb3db;
+        overflow-y: auto;
     }
     nav a {
         flex-basis: 14vh;
@@ -285,5 +293,10 @@ button.menu {
     }
     button.menu {
         display: block;
+    }
+}
+@media (max-width: 500px) {
+    h1{
+        font-size: 2.4em;
     }
 }

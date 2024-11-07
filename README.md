@@ -44,11 +44,11 @@ Veja o exemplo de uma configuração usando a maioria dos recursos **limitlessfs
 const limitlessfs = require('limitlessfs')
 
 // Personalizar as mensagens de ATENÇÃO e ERRO:
-aijr.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
-aijr.__msg.lineRequire = 'Coloque a linha "{0}" ai'
-aijr.__msg.emplyLineParam = 'ATENÇÃO: A linha ({0}) está "{1}". O valor será convertido para "{2}"'
-aijr.__msg.errorLineParam = 'ERRO no valor "{0}", passado como parâmetro da linha: {1}'
-aijr.__msg.emplyLineParamSetted = 'AVISO: A linha ({0}) de valor definido está "{1}". O valor será convertido para o "valor padrão".'
+limitlessfs.__msg.fileNotFound = 'Não encontrou o arquivo {0}'
+limitlessfs.__msg.lineRequire = 'Coloque a linha "{0}" ai'
+limitlessfs.__msg.emplyLineParam = 'ATENÇÃO: A linha ({0}) está "{1}". O valor será convertido para "{2}"'
+limitlessfs.__msg.errorLineParam = 'ERRO no valor "{0}", passado como parâmetro da linha: {1}'
+limitlessfs.__msg.emplyLineParamSetted = 'AVISO: A linha ({0}) de valor definido está "{1}". O valor será convertido para o "valor padrão".'
 
 // Personalizar as tags de comentário:
 limitlessfs.__defaultValues.comment = ['##','>>']

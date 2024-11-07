@@ -133,7 +133,8 @@ Arquivo da Aplicação - `rands.js`:
 const config = require('./configLimitlessfs')
 
 console.log(config)
-// Resultado no console:
+
+//⇊ Resultado no console ⇊:
 ```
 ```txt
 {
